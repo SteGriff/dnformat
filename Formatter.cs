@@ -28,8 +28,7 @@ namespace dnformat
                     //Get the type
                     try
                     {
-                        string typeName = realTypeNameOf(tp);
-                        lastContentType = Type.GetType(typeName);
+                        lastContentType = realTypeNameOf(tp); 
                     }
                     catch (Exception)
                     {
@@ -47,6 +46,7 @@ namespace dnformat
                     catch (Exception)
                     {
                         Console.WriteLine("Can't format {0} as {1}", tp, lastContentType);
+                        return;
                     }
                 }
 
@@ -70,57 +70,63 @@ namespace dnformat
             }
         }
 
-        private static string realTypeNameOf(string typeName)
+        private static Type realTypeNameOf(string typeName)
         {
-            switch (typeName)
+            switch (typeName.ToLower())
             {
                 case "object":
-                    return "System.Object";
+                    return typeof(System.Object);
 
                 case "string":
-                    return "System.String";
+                    return typeof(System.String);
 
                 case "bool":
-                    return "System.Boolean";
+                    return typeof(System.Boolean);
 
                 case "byte":
-                    return "System.Byte";
+                    return typeof(System.Byte);
 
                 case "sbyte":
-                    return "System.SByte";
+                    return typeof(System.SByte);
 
                 case "short":
-                    return "System.Int16";
+                    return typeof(System.Int16);
 
                 case "ushort":
-                    return "System.UInt16";
+                    return typeof(System.UInt16);
 
                 case "int":
-                    return "System.Int32";
+                    return typeof(System.Int32);
 
                 case "uint":
-                    return "System.UInt32";
+                    return typeof(System.UInt32);
 
                 case "long":
-                    return "System.Int64";
+                    return typeof(System.Int64);
 
                 case "ulong":
-                    return "System.UInt64";
+                    return typeof(System.UInt64);
 
                 case "float":
-                    return "System.Single";
+                    return typeof(System.Single);
 
                 case "double":
-                    return "System.Double";
+                    return typeof(System.Double);
 
                 case "decimal":
-                    return "System.Decimal";
+                    return typeof(System.Decimal);
 
                 case "char":
-                    return "System.Char";
+                    return typeof(System.Char);
+
+                case "datetime":
+                    return typeof(System.DateTime);
+
+                case "timespan":
+                    return typeof(System.TimeSpan);
 
                 default:
-                    return typeName;
+                    throw new NotImplementedException(String.Format("Type {0} is not featured.", typeName));
             }
         }
     }

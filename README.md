@@ -26,6 +26,11 @@ Which displays this:
 
 The first argument is a format string, like you would pass to `String.Format` or to `Console.WriteLine`. It's best to put this in speech marks to group it as one argument. After that, pass your params in the format `type:value` as shown in examples above.
 
+## Note
+
+The software internally allows 'timespan' as a type but it's not really supported because the command line parser splits on ':', which makes it impossible to express a string timespan.
+This would require a lexical parser for command line input. Please open a pull request to implement one if you feel so inclined! ;)
+
 ## License
 
 Released into the public domain by means of the [UNLICENSE][2]. No rights reserved.
